@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 Special Notebook</title>
+    <style>
+        :root {
+            --primary: #ff85a2;
+            --secondary: #ffafbd;
+            --tape-body: #444;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin: 0;
+            background: #ffeef2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .book-container {
+            width: 95%;
+            max-width: 400px;
+            height: 650px;
+            position: relative;
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 133, 162, 0.3);
+            display: none;
+            flex-direction: column;
+            padding: 25px;
+            box-sizing: border-box;
+            text-align: center;
+            border: 4px solid var(--secondary);
+        }
+
+        .page.active { display: flex; animation: slideIn 0.5s ease-out; }
+
+        @keyframes slideIn {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .meme-img { width: 100%; border-radius: 15px; margin: 10px 0; object-fit: contain; }
+
+        /* Cassette UI */
+        .cassette-player {
+            background: var(--tape-body);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 0 #222;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .cassette-player:active { transform: translateY(2px); box-shadow: 0 2px 0 #222; }
+
+        .label-area {
+            background: #f0f0f0;
+            height: 45px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 2px solid #666;
+        }
+
+        .reel { width: 28px; height: 28px; border: 4px dashed #333; border-radius: 50%; background: white; }
+        .spinning { animation: spin 2s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .song-info { color: white; font-size: 11px; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
+
+        /* Vertical Flip Cards */
+        .flip-grid { display: flex; flex-direction: column; gap: 12px; height: 420px; overflow-y: auto; padding: 5px; }
+        .flip-card { min-height: 120px; width: 100%; perspective: 1000px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        
+        .card-front, .card-back {
+            position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+        }
+        .card-front { background-size: cover; background-position: center; border: 2px solid white; color: white; font-size: 24px; font-weight: bold; }
+        .card-back { background: var(--primary); color: white; transform: rotateY(180deg); padding: 15px; font-size: 14px; }
+
+        .btn {
+            background: var(--primary); color: white; border: none; padding: 12px;
+            border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: auto;
+        }
+        
+        #gift-overlay {
+            display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.98); border-radius: 20px; z-index: 100;
+            flex-direction: column; justify-content: center; align-items: center; padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="book-container">
+    <div class="page active" id="p1">
+        <h2>Happy New Year! ✨</h2>
+        <img src="https://media.giphy.com/media/uXZOSmv0glEDpG26VC/giphy.gif" alt="Cat Meme" class="meme-img" style="max-height: 150px;">
+        <p>Wishing you a 2025 filled with treats and naps!</p>
+        <button class="btn" onclick="nextPage(2)">Next Page ➔</button>
+    </div>
+
+    <div class="page" id="p2">
+        <h2>A Greeting For You</h2>
+        <div style="font-size: 50px;">✉️</div>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDFkdHVqMHp4MXF2a2tsMXo5dDE2ZXN1czY4YWx0OTM0dnVoOG1wMSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/Q5Ra0QQUpPYdlFmFrj/giphy.gif" alt="Cat Sticker" class="meme-img" style="max-height: 150px;">
+        <p>May your year be as cozy as a warm kitten.</p>
+        <button class="btn" onclick="nextPage(3)">My Bucket List ➔</button>
+    </div>
+
+    <div class="page" id="p3">
+        <h2>2025 Bucket List 📝</h2>
+        <ul style="text-align: left; font-size: 14px; line-height: 1.4; margin-bottom: 10px;">
+            <li>✨ 100% Happiness</li>
+            <li>✨ More adventures</li>
+            <li>✨ Achieving big goals</li>
+            <li>✨ Spend time with you</li>
+        </ul>
+        <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjJ1aGhya2U5bTk5NXJiYzN2c2Yzd3RtcGM2MTZjdGRnZnBiMzIwaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aCoHdEdxEhJcU8jXZd/giphy.gif" 
+             alt="Cat" class="meme-img" style="max-height: 280px; width: 100%; object-fit: cover;">
+        <button class="btn" onclick="nextPage(4)">Play Our Songs ➔</button>
+    </div>
+
+    <div class="page" id="p4">
+        <h2>Retro Mix Tape 📼</h2>
+        <p style="font-size: 12px; margin-bottom: 10px;">Click a tape to play</p>
+
+        <div class="cassette-player" onclick="togglePlay(1)">
+            <div class="label-area"><div class="reel" id="reel1-L"></div><div class="reel" id="reel1-R"></div></div>
+            <div class="song-info">1. For a Reason</div>
+            <audio id="audio1" src="media/for_a_reason.mp3"></audio>
+        </div>
+
+        <div class="cassette-player" onclick="togglePlay(2)">
+            <div class="label-area"><div class="reel" id="reel2-L"></div><div class="reel" id="reel2-R"></div></div>
+            <div class="song-info">2. High on You</div>
+            <audio id="audio2" src="media/high_on_you.mp3"></audio>
+        </div>
+
+        <div class="cassette-player" onclick="togglePlay(3)">
+            <div class="label-area"><div class="reel" id="reel3-L"></div><div class="reel" id="reel3-R"></div></div>
+            <div class="song-info">3. Dil ka jo haal h</div>
+            <audio id="audio3" src="media/dil_ka_jo.mp3"></audio>
+        </div>
+
+        <button class="btn" onclick="nextPage(5)">Special Notes ➔</button>
+    </div>
+
+    <div class="page" id="p5">
+        <h2>For You... ❤️</h2>
+        <div class="flip-grid">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="card-front" style="background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWhkYjAxenlvbjV6NGp4M3M2MXRxZHRubjBubHVlaXFqcWI3eWdmeSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MDJ9IbxxvDUQM/giphy.gif');">1</div>
+                    <div class="card-back">You are incredible!</div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="card-front" style="background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWhkYjAxenlvbjV6NGp4M3M2MXRxZHRubjBubHVlaXFqcWI3eWdmeSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/gXXFrjHFJIMoqKr8UT/giphy.gif');">2</div>
+                    <div class="card-back">Stay shining always.</div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="card-front" style="background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmR5b2Z2N251dDFscDU1OWFseDZmZDZ4bG40aHBuemt1eHNubWJ6MiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/sthmCnCpfr8M8jtTQy/giphy.gif');">3</div>
+                    <div class="card-back">Grateful for you.</div>
+                </div>
+            </div>
+        </div>
+        <button class="btn" onclick="nextPage(6)">Final Surprise ➔</button>
+    </div>
+
+    <div class="page" id="p6">
+        <h2>Happy New Year!</h2>
+        <p style="font-style: italic;">"Cheers to a new year and another chance for us to get it right."</p>
+        <div onclick="showSurprise()" style="font-size: 60px; cursor: pointer; margin: 20px 0;">🎁</div>
+        <p><small>Click the gift!</small></p>
+        <button class="btn" style="background: #333;" onclick="restart()">🔄 Restart</button>
+
+        <div id="gift-overlay">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGhjdmwyMmptc3JkZ2toYW9xbXNtOGtyMWpzYW12cXM3dWhiYXdwYyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/KmxmoHUGPDjfQXqGgv/giphy.gif" style="width: 100%; border-radius: 15px;">
+            <h3>Surprise!! 🎉</h3>
+            <button class="btn" onclick="closeSurprise()">Back</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function nextPage(pageNum) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('p' + pageNum).classList.add('active');
+        closeSurprise();
+    }
+
+    function togglePlay(id) {
+        const currentAudio = document.getElementById('audio' + id);
+        const reels = [document.getElementById(`reel${id}-L`), document.getElementById(`reel${id}-R`)];
+        
+        document.querySelectorAll('audio').forEach(a => {
+            if(a !== currentAudio) { a.pause(); a.currentTime = 0; }
+        });
+        document.querySelectorAll('.reel').forEach(r => r.classList.remove('spinning'));
+
+        if (currentAudio.paused) {
+            currentAudio.play();
+            reels.forEach(r => r.classList.add('spinning'));
+        } else {
+            currentAudio.pause();
+        }
+    }
+
+    function showSurprise() { document.getElementById('gift-overlay').style.display = 'flex'; }
+    function closeSurprise() { document.getElementById('gift-overlay').style.display = 'none'; }
+
+    function restart() {
+        document.querySelectorAll('audio').forEach(a => { a.pause(); a.currentTime = 0; });
+        document.querySelectorAll('.reel').forEach(r => r.classList.remove('spinning'));
+        nextPage(1);
+    }
+</script>
+
+</body>
+</html>
