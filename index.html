@@ -53,7 +53,14 @@
 
         .meme-img { width: 100%; border-radius: 15px; margin: 10px 0; object-fit: contain; }
 
-        /* Cassette UI */
+        /* Scrollable Cassette Container */
+        .cassette-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 5px;
+            margin-bottom: 10px;
+        }
+
         .cassette-player {
             background: var(--tape-body);
             padding: 12px;
@@ -139,24 +146,38 @@
 
     <div class="page" id="p4">
         <h2>Retro Mix Tape 📼</h2>
-        <p style="font-size: 12px; margin-bottom: 10px;">Click a tape to play</p>
+        <p style="font-size: 12px; margin-bottom: 10px;">Select a tape to play</p>
+        
+        <div class="cassette-list">
+            <div class="cassette-player" onclick="togglePlay(1)">
+                <div class="label-area"><div class="reel" id="reel1-L"></div><div class="reel" id="reel1-R"></div></div>
+                <div class="song-info">1. BARGAD</div>
+                <audio id="audio1" src="bargad.mp3"></audio>
+            </div>
 
-        <div class="cassette-player" onclick="togglePlay(1)">
-            <div class="label-area"><div class="reel" id="reel1-L"></div><div class="reel" id="reel1-R"></div></div>
-            <div class="song-info">1. For a Reason</div>
-            <audio id="audio1" src="for_a_reason.mp3"></audio>
-        </div>
+            <div class="cassette-player" onclick="togglePlay(2)">
+                <div class="label-area"><div class="reel" id="reel2-L"></div><div class="reel" id="reel2-R"></div></div>
+                <div class="song-info">2. SHEESHA</div>
+                <audio id="audio2" src="sheesha.mp3"></audio>
+            </div>
 
-        <div class="cassette-player" onclick="togglePlay(2)">
-            <div class="label-area"><div class="reel" id="reel2-L"></div><div class="reel" id="reel2-R"></div></div>
-            <div class="song-info">2. High on You</div>
-            <audio id="audio2" src="high_on_you.mp3"></audio>
-        </div>
+            <div class="cassette-player" onclick="togglePlay(3)">
+                <div class="label-area"><div class="reel" id="reel3-L"></div><div class="reel" id="reel3-R"></div></div>
+                <div class="song-info">3. Dil ka jo haal h</div>
+                <audio id="audio3" src="dil_ka_jo.mp3"></audio>
+            </div>
 
-        <div class="cassette-player" onclick="togglePlay(3)">
-            <div class="label-area"><div class="reel" id="reel3-L"></div><div class="reel" id="reel3-R"></div></div>
-            <div class="song-info">3. Dil ka jo haal h</div>
-            <audio id="audio3" src="dil_ka_jo.mp3"></audio>
+            <div class="cassette-player" onclick="togglePlay(4)">
+                <div class="label-area"><div class="reel" id="reel4-L"></div><div class="reel" id="reel4-R"></div></div>
+                <div class="song-info">4. HIGH ON YOU</div>
+                <audio id="audio4" src="high_on_you.mp3"></audio>
+            </div>
+
+            <div class="cassette-player" onclick="togglePlay(5)">
+                <div class="label-area"><div class="reel" id="reel5-L"></div><div class="reel" id="reel5-R"></div></div>
+                <div class="song-info">5. FOR A REASON</div>
+                <audio id="audio5" src="for_a_reason.mp3"></audio>
+            </div>
         </div>
 
         <button class="btn" onclick="nextPage(5)">Special Notes ➔</button>
@@ -237,5 +258,4 @@
 </script>
 
 </body>
-
 </html>
